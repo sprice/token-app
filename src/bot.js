@@ -21,7 +21,7 @@ bot.onEvent = function(session, message) {
       onPayment(session, message)
       break
     case 'PaymentRequest':
-      welcome(session)
+      sendMessage(session, `We don't take requests. Thanks.`)
       break
   }
 }
@@ -57,9 +57,10 @@ function onPayment(session, message) {
     // handle payments sent to the bot
     if (message.status == 'unconfirmed') {
       // payment has been sent to the ethereum network, but is not yet confirmed
-      sendMessage(session, `Thanks for the payment! 🙏`);
+      sendMessage(session, `We've received your payment attempt.`);
     } else if (message.status == 'confirmed') {
       // handle when the payment is actually confirmed!
+      sendMessage(session, `Thanks for the payment! 🙏`);
     } else if (message.status == 'error') {
       sendMessage(session, `There was an error with your payment!🚫`);
     }
